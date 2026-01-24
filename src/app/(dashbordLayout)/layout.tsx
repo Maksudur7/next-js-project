@@ -15,7 +15,12 @@ import {
 } from "@/components/ui/sidebar"
 import { ReactNode } from "react"
 
-export default function DashbordLayout({children} : {children: ReactNode}) {
+export default function DashbordLayout({ children, admin, user }: { children: ReactNode, admin: ReactNode, user: ReactNode }) {
+
+  const userInfo = {
+    role : "admin"
+  }
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -41,7 +46,7 @@ export default function DashbordLayout({children} : {children: ReactNode}) {
           </Breadcrumb>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          {children}
+          {userInfo.role === "admin" ? admin : user}
         </div>
       </SidebarInset>
     </SidebarProvider>
