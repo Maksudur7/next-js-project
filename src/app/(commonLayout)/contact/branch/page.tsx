@@ -1,8 +1,7 @@
-
-export default function branchPage() {
-    return (
-        <div>
-            <h1>This is branch page</h1>
-        </div>
-    );
+export default function BranchPage() {
+  return (
+    <div>
+      <h1> This is Branch Page </h1>
+    </div>
+  );
 }

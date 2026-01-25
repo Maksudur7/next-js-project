@@ -1,8 +1,7 @@
-
-export default function LodingPage() {
-    return (
-        <div>
-            <h1>loading ......</h1>
-        </div>
-    );
+export default function AboutLoading() {
+  return (
+    <div>
+      <h1> Loading... </h1>
+    </div>
+  );
 }

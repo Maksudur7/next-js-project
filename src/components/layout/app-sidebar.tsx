@@ -1,4 +1,7 @@
-import * as React from "react"
+import * as React from "react";
+
+import { SearchForm } from "@/components/layout/search-form";
+import { VersionSwitcher } from "@/components/layout/version-switcher";
 import {
   Sidebar,
   SidebarContent,
@@ -10,37 +13,37 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import { VersionSwitcher } from "./version-switcher"
-import { SearchForm } from "./search-form"
-import Link from "next/link"
+} from "@/components/ui/sidebar";
+import Link from "next/link";
+import { adminRoutes } from "@/routes/adminRoutes";
+import { userRoutes } from "@/routes/userRoutes";
+import { Route } from "@/types";
+import { Roles } from "@/constants/roles";
 
-// This is sample data.
-const data = {
-  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
-  navMain: [
-    {
-      title: "Getting Started",
-      items: [
-        {
-          title: "Write Blog",
-          url: "/dashboard/writ-blog",
-        },
-        {
-          title: "Analytics",
-          url: "/dashboard/analytics",
-        },
-      ],
-    },
-  ],
-}
+export function AppSidebar({
+  user,
+  ...props
+}: {
+  user: { role: string } & React.ComponentProps<typeof Sidebar>;
+}) {
+  let routes: Route[] = [];
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  switch (user.role) {
+    case Roles.admin:
+      routes = adminRoutes;
+      break;
+    case Roles.user:
+      routes = userRoutes;
+      break;
+    default:
+      routes = [];
+      break;
+  }
+
   return (
     <Sidebar {...props}>
       <SidebarContent>
-        {/* We create a SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
+        {routes.map((item) => (
           <SidebarGroup key={item.title}>
             <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>
@@ -59,5 +62,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

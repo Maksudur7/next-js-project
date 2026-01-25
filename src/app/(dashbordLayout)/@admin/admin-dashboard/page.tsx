@@ -1,7 +1,7 @@
-export default function AdminDashbord(){
-    return(
-        <div>
-            <h1>admin dashbord</h1>
-        </div>
-    )
+export default function AdminDashboard() {
+  return (
+    <div>
+      <h1> Admin Dashboard </h1>
+    </div>
+  );
 }
